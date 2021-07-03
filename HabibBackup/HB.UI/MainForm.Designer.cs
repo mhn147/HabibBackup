@@ -37,6 +37,7 @@ namespace HB.UI
             this.destPathTextBox = new System.Windows.Forms.TextBox();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.nextBtn = new System.Windows.Forms.Button();
+            this.feebackLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // srcPathBrowseBtn
@@ -115,15 +116,28 @@ namespace HB.UI
             this.nextBtn.Name = "nextBtn";
             this.nextBtn.Size = new System.Drawing.Size(75, 23);
             this.nextBtn.TabIndex = 7;
-            this.nextBtn.Text = "Next";
+            this.nextBtn.Text = "Start";
             this.nextBtn.UseVisualStyleBackColor = true;
-            this.nextBtn.Click += new System.EventHandler(this.button1_Click_1);
+            this.nextBtn.Click += new System.EventHandler(this.Start_Click_1);
+            // 
+            // feebackLabel
+            // 
+            this.feebackLabel.AutoSize = true;
+            this.feebackLabel.ForeColor = System.Drawing.Color.Green;
+            this.feebackLabel.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.feebackLabel.Location = new System.Drawing.Point(15, 130);
+            this.feebackLabel.Name = "feebackLabel";
+            this.feebackLabel.Size = new System.Drawing.Size(150, 13);
+            this.feebackLabel.TabIndex = 8;
+            this.feebackLabel.Text = "Backup finished with success.";
+            this.feebackLabel.Visible = false;
             // 
             // HabibBackup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(401, 163);
+            this.Controls.Add(this.feebackLabel);
             this.Controls.Add(this.nextBtn);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.destLabel);
@@ -152,5 +166,6 @@ namespace HB.UI
         private System.Windows.Forms.TextBox destPathTextBox;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.Button nextBtn;
+        private System.Windows.Forms.Label feebackLabel;
     }
 }

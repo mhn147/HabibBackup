@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -56,6 +57,8 @@ namespace HB.UI
                     this.destPathTextBox.Text = "";
                     return;
                 }
+                this.destPathTextBox.Text = Path.Combine(
+                    this.destPathTextBox.Text, $"HabibNasri Backup - {DateTime.Now.Ticks}");
             }
             catch (Exception ex)
             {
@@ -105,9 +108,72 @@ namespace HB.UI
 
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void Start_Click_1(object sender, EventArgs e)
         {
+            this.feebackLabel.Visible = false;
+            if (string.IsNullOrWhiteSpace(this.srcPathTextBox.Text) ||
+                    string.IsNullOrWhiteSpace(this.destPathTextBox.Text))
+            {
+                MessageBox.Show("Source and destination paths must be not empty.", "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
+            Directory.CreateDirectory(this.destPathTextBox.Text);
+            CopyFiles(this.srcPathTextBox.Text, this.destPathTextBox.Text);
+            this.feebackLabel.Visible = true;
         }
+
+        #region unmanaged copy directory code
+        private enum FO_Func: uint
+        {
+            FO_COPY = 0x0002,
+            FO_DELETE = 0x0003,
+            FO_MOVE = 0x0001,
+            FO_RENAME = 0x0004
+        }
+
+        private struct SHFILEOPSTRUCT
+        {
+            public IntPtr hwnd;
+            public FO_Func wFunc;
+            [MarshalAs(UnmanagedType.LPWStr)]
+            public string pFrom;
+            [MarshalAs(UnmanagedType.LPWStr)]
+            public string pTo;
+            public ushort fFlags;
+            public bool fAnyOperationsAborted;
+            public IntPtr hNameMappings;
+            [MarshalAs(UnmanagedType.LPWStr)]
+            public string lpszProgressTitle;
+        }
+
+        [DllImport("shell32.dll", CharSet = CharSet.Unicode)]
+        static extern int SHFileOperation([In] ref SHFILEOPSTRUCT
+            lpFileOp);
+
+        private static SHFILEOPSTRUCT _ShFile;
+
+        public static void CopyFiles(string sSource, string sTarget)
+        {
+            //Link: https://social.msdn.microsoft.com/Forums/en-US/1c370cae-d7e1-46cf-afd6-dfd9d1a09899/shfileoperation-does-not-working-at-all?forum=windowsgeneraldevelopmentissues
+            //Apparently, paths should be terminated by the null character
+            sSource += '\0';
+            sTarget += '\0';
+
+            try
+            {
+                _ShFile.wFunc = FO_Func.FO_COPY;
+                _ShFile.pFrom = sSource;
+                _ShFile.pTo = sTarget;
+                SHFileOperation(ref _ShFile);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
     }
+
 }

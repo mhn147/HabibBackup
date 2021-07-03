@@ -9,9 +9,29 @@ namespace HB.Core
 {
     public static class FileProcessor
     {
-        private static Object _getFolderSize(string dirPath)
+        public static long GetDirectorySizeInBytes(string dirPath)
         {
-            throw new NotImplementedException();
+            if (!Directory.Exists(dirPath))
+            {
+                throw new ArgumentException($"Directory with path: ${dirPath} does not exist.");
+            }
+
+            long size = 0;
+            
+            var directoryInfo = new DirectoryInfo(dirPath);
+            var directoryFiles = directoryInfo.GetFiles();
+            foreach (var file in directoryFiles)
+            {
+                size += file.Length;
+            }
+            // Add subdirectory sizes.
+            var dirSubDirectories = directoryInfo.GetDirectories();
+            foreach (var subDirectory in dirSubDirectories)
+            {
+                size += GetDirectorySizeInBytes(subDirectory.FullName);
+            }
+
+            return size;
         }
     }
 }
