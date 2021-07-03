@@ -29,6 +29,7 @@ namespace HB.UI
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HabibBackup));
             this.srcPathBrowseBtn = new System.Windows.Forms.Button();
             this.srcPathTextBox = new System.Windows.Forms.TextBox();
             this.srcLabel = new System.Windows.Forms.Label();
@@ -42,7 +43,7 @@ namespace HB.UI
             // 
             // srcPathBrowseBtn
             // 
-            this.srcPathBrowseBtn.Location = new System.Drawing.Point(354, 24);
+            this.srcPathBrowseBtn.Location = new System.Drawing.Point(543, 25);
             this.srcPathBrowseBtn.Name = "srcPathBrowseBtn";
             this.srcPathBrowseBtn.Size = new System.Drawing.Size(34, 20);
             this.srcPathBrowseBtn.TabIndex = 0;
@@ -57,7 +58,7 @@ namespace HB.UI
             this.srcPathTextBox.Multiline = true;
             this.srcPathTextBox.Name = "srcPathTextBox";
             this.srcPathTextBox.ReadOnly = true;
-            this.srcPathTextBox.Size = new System.Drawing.Size(333, 20);
+            this.srcPathTextBox.Size = new System.Drawing.Size(522, 20);
             this.srcPathTextBox.TabIndex = 2;
             this.srcPathTextBox.TextChanged += new System.EventHandler(this.srcPathTextBox_TextChanged);
             // 
@@ -74,7 +75,7 @@ namespace HB.UI
             // 
             // destPathBrowseBtn
             // 
-            this.destPathBrowseBtn.Location = new System.Drawing.Point(354, 78);
+            this.destPathBrowseBtn.Location = new System.Drawing.Point(543, 79);
             this.destPathBrowseBtn.Name = "destPathBrowseBtn";
             this.destPathBrowseBtn.Size = new System.Drawing.Size(34, 20);
             this.destPathBrowseBtn.TabIndex = 1;
@@ -99,7 +100,7 @@ namespace HB.UI
             this.destPathTextBox.Multiline = true;
             this.destPathTextBox.Name = "destPathTextBox";
             this.destPathTextBox.ReadOnly = true;
-            this.destPathTextBox.Size = new System.Drawing.Size(333, 20);
+            this.destPathTextBox.Size = new System.Drawing.Size(522, 20);
             this.destPathTextBox.TabIndex = 4;
             // 
             // splitter1
@@ -112,7 +113,7 @@ namespace HB.UI
             // 
             // nextBtn
             // 
-            this.nextBtn.Location = new System.Drawing.Point(314, 121);
+            this.nextBtn.Location = new System.Drawing.Point(502, 120);
             this.nextBtn.Name = "nextBtn";
             this.nextBtn.Size = new System.Drawing.Size(75, 23);
             this.nextBtn.TabIndex = 7;
@@ -136,7 +137,7 @@ namespace HB.UI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(401, 163);
+            this.ClientSize = new System.Drawing.Size(591, 163);
             this.Controls.Add(this.feebackLabel);
             this.Controls.Add(this.nextBtn);
             this.Controls.Add(this.splitter1);
@@ -147,6 +148,7 @@ namespace HB.UI
             this.Controls.Add(this.destPathBrowseBtn);
             this.Controls.Add(this.srcPathBrowseBtn);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimizeBox = false;
             this.Name = "HabibBackup";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

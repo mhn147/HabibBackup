@@ -121,6 +121,7 @@ namespace HB.UI
 
             Directory.CreateDirectory(this.destPathTextBox.Text);
             CopyFiles(this.srcPathTextBox.Text, this.destPathTextBox.Text);
+            this.destPathTextBox.Text = "";
             this.feebackLabel.Visible = true;
         }
 
